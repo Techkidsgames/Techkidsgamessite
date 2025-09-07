@@ -2,7 +2,7 @@ function createStyles() {
     const style = document.createElement('style');
     style.textContent = `
 body {
-background-color: #222;
+background-color: #212121;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -71,12 +71,28 @@ color: #fff;
 border: none;
 border-radius:50px;
 cursor: pointer;
+transition: transform 250ms;
 }
 
 .button-epic:hover {
 background-color: gray;
+transform: scale(0.8);
+}
+.button-epic2 {
+position: unset;
+top: 9000px;
+left: 5px;
+padding: 10px 20px;
+background-color: #222;
+color: #fff;
+border: none;
+border-radius:50px;
+cursor: pointer;
 }
 
+.button-epic2:hover {
+background-color: gray;
+}
 .top-button:hover {
 background-color: #0056b3;
 }
@@ -124,24 +140,14 @@ transition: transform 250ms;
 .button-container:hover {
 transform: scale(1.1);
 }
-.button-container2 {
-gap: 10px;
-background-color: #1e1f22;
-border-radius: 25px;
-display: flex;
-justify-content: center;
-align-items: center;
-transition: transform 250ms;
-width: 5%;
-height: 40.4px;
-}
-.button-container2:hover {
-transform: scale(0.8);
-}
 .game-img {
 border-radius: 25px;
 height: 225px;
 width: 225px;
+transition: transform 250ms;
+}
+.game-img:hover {
+transform: scale(0.9);
 }
 .image-container {
 margin-top: 380px;
@@ -200,6 +206,32 @@ transition: ease-in;
 width: 40px;
 height: 40px;
 border-radius: 25px;
+}
+.chatwindow {
+display: none;
+position: fixed;
+top: 0; left: 0;
+width: 100%; height: 100%;
+background: rgba(0,0,0,0.7);
+color: white;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+text-align: center;
+}
+.closechatbutton {
+position: unset;
+top: 9000px;
+left: 5px;
+padding: 10px 20px;
+background-color: #007bff;
+color: #fff;
+border: none;
+cursor: pointer;
+border-radius: 8px;
+}
+.closechatbutton:hover {
+background-color: #0056b3;
 }
     `;
     document.head.appendChild(style);
@@ -1504,17 +1536,27 @@ function loadContent() {
             Games
         </button>
     </a>
-    <button class="button-epic" onclick="launchab()">
+        <button class="top-button" onclick="openchat()">
+            Chat
+        </button>
+    <button class="button-epic2" onclick="launchab()">
         Open in about:blank
     </button>
         
     <h4>--- holden was here ---</h4>
   <br />
 </div>
+<div class="chatwindow" id="chatwindow">
+<div style="width: 400px; height: 722px; max-height: 100vh; max-width: 100%; border-radius: 8px; border: none; display: flex; flex-direction: column; background-color: #222;">
+<iframe src="https://techchat-wif0.onrender.com/" style="width: 400px; height: 700px; max-height: 100vh; max-width: 100%; border-radius: 8px; border: none; display: flex; flex-direction: column;"></iframe>
+<button style="margin-bottom: auto;" class="closechatbutton" onclick="javascript:document.getElementById('chatwindow').style.display = 'none';">Close</button>
+</div>
+</div>
 
         `;
     }
     document.body.appendChild(content);
+    document.getElementById('loadinganim').remove();
 }
 function init() {
     createStyles();
@@ -1531,5 +1573,8 @@ function launchab() {
     stl.left = stl.right = stl.top = stl.bottom = '0';
     iframe.src = self.location;
     tab.document.body.appendChild(iframe);
+}
+function openchat() {
+document.getElementById('chatwindow').style.display = 'flex';
 }
 window.onload = init;
