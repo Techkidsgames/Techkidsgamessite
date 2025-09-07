@@ -206,33 +206,26 @@ iframe {
                     const overlay = document.getElementById("fullscreenOverlay");
                   
                     function confirmExit() {
-                      // User wants to exit fullscreen, so just let it happen
                       overlay.style.display = "none";
                       console.log("Exiting fullscreen...");
-                      // Optionally, you can trigger fullscreen exit here (if needed)
                       document.exitFullscreen();
                     }
                   
                     function stayInFullscreen() {
-                      // User doesn't want to exit, so re-enter fullscreen
                       overlay.style.display = "none";
                       iframe.requestFullscreen().catch(err => {
                         console.warn("Fullscreen request denied:", err);
                       });
                     }
                   
-                    // Detect fullscreen change
                     document.addEventListener("fullscreenchange", () => {
                       if (!document.fullscreenElement) {
-                        // Fullscreen was exited, show overlay with confirmation
                         overlay.style.display = "flex";
                       }
                     });
                   
-                    // Add event listener for Esc key to show overlay
                     document.addEventListener("keydown", (e) => {
                       if (e.key === "Escape" && document.fullscreenElement) {
-                        // Stop the fullscreen exit by showing the confirmation overlay
                         e.preventDefault();
                         overlay.style.display = "flex";
                       }
